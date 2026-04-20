@@ -143,28 +143,38 @@ img{display:block}
 
 /* ── TOPBAR ── */
 .topbar{
-  background:rgba(255,255,255,.88);
+  background:rgba(255,255,255,.94);
   backdrop-filter:blur(20px) saturate(180%);
   -webkit-backdrop-filter:blur(20px) saturate(180%);
-  border-bottom:1px solid rgba(226,232,240,.7);
+  border-bottom:1px solid rgba(226,232,240,.8);
   padding:0 40px;
   position:sticky;top:0;z-index:100;
-  box-shadow:0 1px 20px rgba(10,15,30,.06);
+  box-shadow:0 1px 12px rgba(10,15,30,.05);
 }
 .topbar-in{
   max-width:1200px;margin:0 auto;
-  display:flex;align-items:center;gap:7px;
-  padding:12px 0;overflow-x:auto;scrollbar-width:none;
+  display:flex;align-items:center;
+  padding:9px 0;
 }
-.topbar-in::-webkit-scrollbar{display:none}
+.topbar-filters{
+  display:flex;align-items:center;gap:5px;
+  flex:1;overflow-x:auto;scrollbar-width:none;
+  padding-right:14px;min-width:0;
+}
+.topbar-filters::-webkit-scrollbar{display:none}
+.topbar-lang{
+  display:flex;align-items:center;gap:4px;
+  flex-shrink:0;
+  padding-left:14px;
+  border-left:1px solid var(--border);
+}
 
-.fl{font-size:11px;color:var(--muted);white-space:nowrap;font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-right:3px;flex-shrink:0}
 .fb{
-  padding:6px 14px;border-radius:20px;
+  padding:5px 13px;border-radius:20px;
   border:1px solid var(--border);background:transparent;
-  font-family:'DM Sans',sans-serif;font-size:12px;
+  font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;
   cursor:pointer;white-space:nowrap;
-  transition:all .2s cubic-bezier(.4,0,.2,1);
+  transition:all .18s cubic-bezier(.4,0,.2,1);
   color:var(--ink);flex-shrink:0;
 }
 .fb:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-pal)}
@@ -172,19 +182,18 @@ img{display:block}
 .fb.on{
   background:linear-gradient(135deg,#2563eb,#3b82f6);
   color:#fff;border-color:transparent;
-  box-shadow:0 2px 8px rgba(37,99,235,.3);
+  box-shadow:0 2px 6px rgba(37,99,235,.28);
 }
 
-.sep{width:1px;height:20px;background:var(--border);flex-shrink:0;margin:0 4px}
-.ls{display:flex;gap:4px;margin-left:auto;flex-shrink:0}
 .lb{
   padding:5px 11px;border-radius:8px;
   border:1px solid var(--border);background:transparent;
-  font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;
-  cursor:pointer;transition:all .2s;color:var(--muted);
+  font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;
+  letter-spacing:.04em;text-transform:uppercase;
+  cursor:pointer;transition:all .18s;color:var(--muted);
 }
 .lb:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-.lb.on{background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff;border-color:transparent}
+.lb.on{background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff;border-color:transparent;box-shadow:0 2px 6px rgba(37,99,235,.28)}
 
 /* ── I18N ── */
 .uk [data-en]{display:none!important}
@@ -475,15 +484,15 @@ footer strong{color:var(--blue);font-weight:600}
 
 <div class="topbar">
   <div class="topbar-in">
-    <span class="fl" data-uk>Фільтр:</span><span class="fl" data-en>Filter:</span>
-    <button class="fb on" onclick="fc('all',this)"><span data-uk>Усі</span><span data-en>All</span></button>
-    <button class="fb" onclick="fc('ling',this)">🗣 <span data-uk>Мови</span><span data-en>Language</span></button>
-    <button class="fb" onclick="fc('travel',this)">🗺 <span data-uk>Афіша</span><span data-en>Events</span></button>
-    <button class="fb" onclick="fc('edu',this)">📚 <span data-uk>Освіта</span><span data-en>Education</span></button>
-    <button class="fb" onclick="fc('facts',this)">💡 <span data-uk>Факти</span><span data-en>Facts</span></button>
-    <button class="fb" onclick="fc('dias',this)">🌍 <span data-uk>Діаспора</span><span data-en>Diaspora</span></button>
-    <div class="sep"></div>
-    <div class="ls">
+    <div class="topbar-filters">
+      <button class="fb on" onclick="fc('all',this)"><span data-uk>Усі канали</span><span data-en>All channels</span></button>
+      <button class="fb" onclick="fc('ling',this)">🗣 <span data-uk>Мови</span><span data-en>Language</span></button>
+      <button class="fb" onclick="fc('travel',this)">🗺 <span data-uk>Афіша</span><span data-en>Events</span></button>
+      <button class="fb" onclick="fc('edu',this)">📚 <span data-uk>Освіта</span><span data-en>Education</span></button>
+      <button class="fb" onclick="fc('facts',this)">💡 <span data-uk>Факти</span><span data-en>Facts</span></button>
+      <button class="fb" onclick="fc('dias',this)">🌍 <span data-uk>Діаспора</span><span data-en>Diaspora</span></button>
+    </div>
+    <div class="topbar-lang">
       <button class="lb on" onclick="sl('uk',this)">УКР</button>
       <button class="lb" onclick="sl('en',this)">ENG</button>
     </div>
@@ -689,7 +698,7 @@ footer strong{color:var(--blue);font-weight:600}
 </div>
 
 <!-- 7. Німеччина | Діаспора -->
-<div class="card" data-cat="travel dias" style="animation-delay:.21s">
+<div class="card" data-cat="dias" style="animation-delay:.21s">
   <div class="ca"></div>
   <div class="ct-top">
     <div class="av" id="av-2130166752" style="padding:0"><img src="data:image/jpeg;base64,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" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:11px"></div>
@@ -761,7 +770,7 @@ footer strong{color:var(--blue);font-weight:600}
 </div>
 
 <!-- 10. Українська діаспора — avatar from Apify -->
-<div class="card" data-cat="travel dias" style="animation-delay:.30s">
+<div class="card" data-cat="dias" style="animation-delay:.30s">
   <div class="ca"></div>
   <div class="ct-top">
     <div class="av" style="padding:0">
@@ -837,7 +846,7 @@ footer strong{color:var(--blue);font-weight:600}
 </div>
 
 <!-- 13. Польща | Діаспора — avatar from Apify -->
-<div class="card" data-cat="travel dias" style="animation-delay:.39s">
+<div class="card" data-cat="dias" style="animation-delay:.39s">
   <div class="ca"></div>
   <div class="ct-top">
     <div class="av" style="padding:0">
