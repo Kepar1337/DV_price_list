@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DV Media Group — Прайс-лист</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ── DESIGN TOKENS ── */
+:root{
+  --ink:#0a0f1e;
+  --paper:#edf2fc;
+  --blue:#2563eb;
+  --blue-mid:#3b82f6;
+  --blue-lt:#dbeafe;
+  --blue-pal:#eff6ff;
+  --muted:#64748b;
+  --border:rgba(203,213,225,0.8);
+  --white:#fff;
+  --r:20px;
+  --rs:12px;
+  --shadow-card:0 2px 8px rgba(10,15,30,0.06),0 0 0 1px rgba(37,99,235,0.05);
+  --shadow-hover:0 16px 48px rgba(37,99,235,0.14),0 4px 12px rgba(10,15,30,0.08);
+  --glass-bg:rgba(255,255,255,0.78);
+  --glass-border:rgba(255,255,255,0.65);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  overflow-x:hidden;
+}
+
+/* Subtle ambient gradient */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse 80% 50% at 15% 20%,rgba(37,99,235,.07) 0%,transparent 55%),
+    radial-gradient(ellipse 60% 40% at 85% 80%,rgba(99,102,241,.05) 0%,transparent 50%);
+  pointer-events:none;
+  z-index:0;
+}
+
+img{display:block}
+
+/* ── HEADER ── */
+.hdr{
+  background:linear-gradient(135deg,#050e22 0%,#0d1b3e 55%,#091228 100%);
+  color:var(--white);
+  padding:0 40px;
+  position:relative;
+  overflow:hidden;
+}
+.hdr-geo{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.geo{position:absolute;border-radius:50%;border:1px solid rgba(59,130,246,.18)}
+
+/* Glowing blob in header */
+.hdr::after{
+  content:'';
+  position:absolute;
+  width:440px;height:440px;
+  border-radius:50%;
+  background:rgba(37,99,235,.12);
+  filter:blur(90px);
+  top:-160px;right:-60px;
+  pointer-events:none;
+}
+
+.hdr-in{
+  max-width:1200px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  padding:52px 0 44px;
+  gap:32px;
+  position:relative;
+  z-index:2;
+}
+
+.brand{display:flex;align-items:center;margin-bottom:28px}
+.brand-wordmark{display:flex;align-items:center;gap:14px}
+.brand-dv{
+  font-family:'Syne',sans-serif;
+  font-size:42px;font-weight:800;
+  background:linear-gradient(125deg,#93c5fd 0%,#818cf8 55%,#c084fc 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:-.03em;line-height:1;
+}
+.brand-bar{
+  width:1.5px;height:30px;
+  background:linear-gradient(to bottom,transparent,rgba(129,140,248,.55),transparent);
+  flex-shrink:0;
+}
+.brand-info{display:flex;flex-direction:column;gap:3px}
+.brand-name{
+  font-family:'Syne',sans-serif;
+  font-size:13px;font-weight:700;
+  color:rgba(255,255,255,.92);
+  letter-spacing:.14em;text-transform:uppercase;
+  line-height:1;
+}
+.brand-sub{
+  font-size:10px;font-weight:400;
+  color:rgba(148,163,184,.65);
+  letter-spacing:.09em;text-transform:uppercase;
+}
+
+.hdr-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(28px,4.5vw,54px);
+  font-weight:800;line-height:1.04;
+  letter-spacing:-.03em;margin-bottom:12px;
+}
+.hdr-title span{color:#60a5fa}
+.hdr-sub{font-size:14px;color:#94a3b8;font-weight:300;max-width:420px;line-height:1.7}
+
+.hdr-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.hdr-pill{
+  padding:5px 13px;border-radius:20px;
+  font-size:11px;font-weight:500;
+  background:rgba(59,130,246,.12);color:#93c5fd;
+  border:1px solid rgba(59,130,246,.2);
+  backdrop-filter:blur(4px);
+}
+
+.hdr-stats{display:flex;flex-direction:column;gap:20px;min-width:160px;flex-shrink:0}
+.stat{text-align:right}
+.stat-n{
+  font-family:'Syne',sans-serif;
+  font-size:34px;font-weight:700;
+  background:linear-gradient(135deg,#60a5fa 0%,#a78bfa 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;
+}
+.stat-l{font-size:10px;color:#475569;margin-top:4px;text-transform:uppercase;letter-spacing:.08em}
+
+/* ── TOPBAR ── */
+.topbar{
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:1px solid rgba(226,232,240,.7);
+  padding:0 40px;
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 1px 20px rgba(10,15,30,.06);
+}
+.topbar-in{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;gap:7px;
+  padding:12px 0;overflow-x:auto;scrollbar-width:none;
+}
+.topbar-in::-webkit-scrollbar{display:none}
+
+.fl{font-size:11px;color:var(--muted);white-space:nowrap;font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-right:3px;flex-shrink:0}
+.fb{
+  padding:6px 14px;border-radius:20px;
+  border:1px solid var(--border);background:transparent;
+  font-family:'DM Sans',sans-serif;font-size:12px;
+  cursor:pointer;white-space:nowrap;
+  transition:all .2s cubic-bezier(.4,0,.2,1);
+  color:var(--ink);flex-shrink:0;
+}
+.fb:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-pal)}
+.fb:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.fb.on{
+  background:linear-gradient(135deg,#2563eb,#3b82f6);
+  color:#fff;border-color:transparent;
+  box-shadow:0 2px 8px rgba(37,99,235,.3);
+}
+
+.sep{width:1px;height:20px;background:var(--border);flex-shrink:0;margin:0 4px}
+.ls{display:flex;gap:4px;margin-left:auto;flex-shrink:0}
+.lb{
+  padding:5px 11px;border-radius:8px;
+  border:1px solid var(--border);background:transparent;
+  font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;
+  cursor:pointer;transition:all .2s;color:var(--muted);
+}
+.lb:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.lb.on{background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff;border-color:transparent}
+
+/* ── I18N ── */
+.uk [data-en]{display:none!important}
+.en [data-uk]{display:none!important}
+
+/* ── CONTENT ── */
+.main-ct{
+  max-width:1200px;margin:0 auto;
+  padding:36px 40px 80px;
+  position:relative;z-index:1;
+}
+
+/* Summary */
+.sum{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:32px}
+.sc{
+  background:var(--glass-bg);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--glass-border);
+  border-radius:var(--r);padding:18px 20px;
+  position:relative;overflow:hidden;
+  box-shadow:var(--shadow-card);
+  transition:transform .2s,box-shadow .2s;
+}
+.sc:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
+.sc::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,#2563eb,#60a5fa,#818cf8);
+}
+.sc-n{
+  font-family:'Syne',sans-serif;font-size:26px;font-weight:700;
+  background:linear-gradient(135deg,#2563eb,#3b82f6);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;
+}
+.sc-l{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.4}
+
+/* Formats */
+.fmt{
+  background:var(--glass-bg);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--glass-border);
+  border-radius:var(--r);padding:24px 26px;margin-bottom:36px;
+  box-shadow:var(--shadow-card);
+}
+.fmt-t{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:16px}
+.fmt-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.fi{padding:14px 16px;background:var(--blue-pal);border-radius:12px}
+.fi.nat{background:#f8faff;border:1px dashed #bfdbfe}
+.fi-n{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:7px}
+.fi-d{font-size:12px;color:var(--muted);line-height:1.6}
+.hl{display:inline-block;background:var(--blue-lt);color:#1d4ed8;border-radius:4px;padding:1px 5px;font-size:11px;font-weight:600;margin-right:2px}
+
+/* Section head */
+.sh{display:flex;align-items:baseline;gap:9px;margin-bottom:20px;margin-top:36px}
+.sh h2{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;letter-spacing:-.01em}
+.sh-c{font-size:12px;color:var(--muted)}
+
+/* ── CARDS ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
+
+.card{
+  background:var(--glass-bg);
+  backdrop-filter:blur(16px) saturate(160%);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);
+  border:1px solid var(--glass-border);
+  border-radius:var(--r);padding:22px;
+  position:relative;overflow:hidden;
+  box-shadow:var(--shadow-card);
+  transition:transform .25s cubic-bezier(.4,0,.2,1),box-shadow .25s cubic-bezier(.4,0,.2,1),border-color .25s;
+  animation:cardUp .5s cubic-bezier(.4,0,.2,1) both;
+}
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:var(--shadow-hover);
+  border-color:rgba(37,99,235,.22);
+}
+
+/* Top gradient accent bar */
+.ca{
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,#2563eb 0%,#60a5fa 50%,#818cf8 100%);
+}
+
+/* ── FEATURED BADGES ── */
+.badge{
+  display:inline-flex;align-items:center;
+  flex-shrink:0;align-self:flex-start;
+  padding:3px 9px;border-radius:20px;
+  font-size:10px;font-weight:700;
+  letter-spacing:.04em;text-transform:uppercase;
+  vertical-align:middle;
+}
+.badge-top{
+  background:linear-gradient(135deg,#fbbf24,#f59e0b);
+  color:#78350f;
+  box-shadow:0 2px 8px rgba(245,158,11,.35);
+}
+.badge-er{
+  background:linear-gradient(135deg,#34d399,#10b981);
+  color:#064e3b;
+  box-shadow:0 2px 8px rgba(16,185,129,.3);
+}
+
+.ct-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px}
+.cn-row{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;margin-bottom:3px}
+.cn-row .cn{margin-bottom:0;flex:1;min-width:0}
+.av{
+  width:54px;height:54px;min-width:54px;
+  border-radius:14px;
+  background:var(--blue-lt);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--blue);
+  flex-shrink:0;overflow:hidden;
+  border:2px solid rgba(37,99,235,.12);
+  box-shadow:0 4px 12px rgba(37,99,235,.12);
+}
+.av img{width:100%;height:100%;object-fit:cover;display:block}
+
+.ta{flex:1;min-width:0;overflow:hidden}
+.cn{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;line-height:1.3;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cl{font-size:11px;color:var(--blue);text-decoration:none;font-weight:500;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .15s}
+.cl:hover{color:#1d4ed8;text-decoration:underline}
+.cl:focus-visible{outline:2px solid var(--blue);border-radius:2px}
+
+.tags{margin-top:6px;line-height:1.9}
+.tag{display:inline-flex;align-items:center;vertical-align:middle;padding:3px 8px;border-radius:9px;font-size:10px;font-weight:600;background:var(--blue-pal);color:#1e40af;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap;margin-right:4px}
+.tag.geo{background:#f0fdf4;color:#166534}
+
+.cs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:14px}
+.cs-s{text-align:center}
+.cs-v{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;line-height:1}
+.cs-v.er{background:linear-gradient(135deg,#2563eb,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cs-l{font-size:9px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.06em;line-height:1.3}
+
+/* Price grid */
+.cp{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.pr{
+  display:flex;flex-direction:column;
+  background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);
+  border-radius:var(--rs);padding:10px 12px;
+  border:1px solid rgba(59,130,246,.1);
+}
+.pr.nat{
+  grid-column:1/-1;background:#f8faff;
+  border:1px dashed #bfdbfe;
+  flex-direction:row;align-items:center;
+  justify-content:space-between;gap:8px;padding:9px 13px;
+}
+.pf{font-size:9px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;white-space:nowrap}
+.pr.nat .pf{margin-bottom:0}
+.pv{
+  font-family:'Syne',sans-serif;
+  font-size:16px;font-weight:700;
+  background:linear-gradient(135deg,#2563eb,#3b82f6);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.pv .cur{font-size:12px;font-weight:500;font-family:Georgia,serif;-webkit-text-fill-color:var(--muted);margin-right:1px}
+.nl{font-size:11px;color:var(--muted);white-space:nowrap}
+.nc{font-size:11px;color:var(--blue);font-weight:700;text-decoration:none;white-space:nowrap;transition:color .15s}
+.nc:hover{text-decoration:underline;color:#1d4ed8}
+.nc:focus-visible{outline:2px solid var(--blue);border-radius:2px}
+
+/* Contact section */
+.con{
+  background:linear-gradient(135deg,#040c1f 0%,#0d1b3e 60%,#091428 100%);
+  border-radius:24px;padding:44px 48px;margin-top:56px;
+  display:grid;grid-template-columns:1fr auto;
+  align-items:center;gap:32px;
+  position:relative;overflow:hidden;
+  box-shadow:0 24px 64px rgba(10,15,30,.2);
+}
+.con::before{content:'';position:absolute;width:300px;height:300px;border-radius:50%;border:1px solid rgba(59,130,246,.14);top:-80px;right:60px}
+.con::after{content:'';position:absolute;width:160px;height:160px;border-radius:50%;border:1px solid rgba(59,130,246,.09);bottom:-30px;right:180px}
+.con-ey{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:#60a5fa;margin-bottom:10px;font-weight:500}
+.con-t{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:#fff;line-height:1.15;margin-bottom:10px}
+.con-s{color:#64748b;font-size:13px;font-weight:300;line-height:1.7;max-width:380px}
+.con-bs{display:flex;flex-direction:column;gap:10px;position:relative;z-index:2}
+.bp{
+  display:inline-flex;align-items:center;gap:8px;padding:13px 26px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#2563eb,#3b82f6);
+  color:#fff;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;
+  text-decoration:none;white-space:nowrap;
+  transition:all .2s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 4px 16px rgba(37,99,235,.4);
+}
+.bp:hover{background:linear-gradient(135deg,#1d4ed8,#2563eb);transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,99,235,.5)}
+.bp:focus-visible{outline:2px solid #60a5fa;outline-offset:3px}
+.bs{
+  display:inline-flex;align-items:center;gap:8px;padding:13px 26px;
+  border-radius:12px;background:transparent;
+  border:1px solid rgba(255,255,255,.15);
+  color:#94a3b8;font-size:13px;text-decoration:none;white-space:nowrap;transition:all .2s;
+}
+.bs:hover{border-color:rgba(255,255,255,.3);color:#fff}
+
+/* Mobile sticky CTA */
+.mobile-cta{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;
+  z-index:200;padding:10px 16px 16px;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-top:1px solid rgba(226,232,240,.7);
+  box-shadow:0 -4px 24px rgba(10,15,30,.1);
+}
+.mobile-cta a{
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  width:100%;padding:14px;border-radius:12px;
+  background:linear-gradient(135deg,#2563eb,#3b82f6);
+  color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;
+  text-decoration:none;box-shadow:0 4px 16px rgba(37,99,235,.4);
+}
+
+footer{text-align:center;padding:28px 40px;font-size:11px;color:var(--muted);border-top:1px solid var(--border);position:relative;z-index:1}
+footer strong{color:var(--blue);font-weight:600}
+
+@keyframes cardUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── MOBILE ── */
+@media(max-width:900px){
+  .hdr,.topbar,footer{padding-left:16px;padding-right:16px}
+  .main-ct{padding:24px 16px 100px}
+  .hdr-in{grid-template-columns:1fr;padding:36px 0 28px;gap:24px}
+  .hdr-stats{flex-direction:row;gap:20px;flex-wrap:wrap}
+  .stat{text-align:left}
+  .sum{grid-template-columns:repeat(2,1fr);gap:10px}
+  .grid{grid-template-columns:1fr}
+  .con{grid-template-columns:1fr;padding:28px 22px;gap:24px}
+  .con-bs{flex-direction:row;flex-wrap:wrap}
+  .mobile-cta{display:block}
+}
+@media(max-width:600px){
+  .hdr-title{font-size:clamp(22px,7.5vw,34px)}
+  .sum{grid-template-columns:1fr 1fr;gap:8px}
+  .sc-n{font-size:22px}
+  .cs{grid-template-columns:repeat(3,1fr)}
+  .cp{grid-template-columns:1fr 1fr}
+  .con-bs{flex-direction:column}
+  .bp,.bs{width:100%;justify-content:center;text-align:center}
+  .hdr-stats{gap:14px}
+  .stat-n{font-size:28px}
+}
+@media(max-width:480px){
+  .fmt-g{grid-template-columns:1fr}
+  .sum{grid-template-columns:1fr 1fr}
+  .topbar{padding-left:12px;padding-right:12px}
+}
+</style>
+</head>
+<body class="uk">
+
+<header class="hdr">
+  <div class="hdr-geo">
+    <div class="geo" style="width:460px;height:460px;top:-180px;right:-80px"></div>
+    <div class="geo" style="width:240px;height:240px;top:-60px;right:200px;opacity:.5"></div>
+    <div class="geo" style="width:100px;height:100px;bottom:16px;left:50px;opacity:.3"></div>
+  </div>
+  <div class="hdr-in">
+    <div>
+      <div class="brand">
+        <div class="brand-wordmark">
+          <span class="brand-dv">DV</span>
+          <span class="brand-bar"></span>
+          <div class="brand-info">
+            <span class="brand-name">Media Group</span>
+            <span class="brand-sub">Telegram · 2026</span>
+          </div>
+        </div>
+      </div>
+      <h1 class="hdr-title" data-uk>Рекламний<br><span>прайс-лист</span></h1>
+      <h1 class="hdr-title" data-en>Advertising<br><span>price list</span></h1>
+      <p class="hdr-sub" data-uk>13 українських Telegram-каналів. Охоплення, статистика та умови розміщення реклами.</p>
+      <p class="hdr-sub" data-en>13 Ukrainian Telegram channels. Reach, stats, and ad placement terms.</p>
+      <div class="hdr-pills">
+        <span class="hdr-pill" data-uk>13 каналів</span><span class="hdr-pill" data-en>13 channels</span>
+        <span class="hdr-pill">587K+ підписників</span>
+        <span class="hdr-pill" data-uk>Оновлено: квітень 2026</span><span class="hdr-pill" data-en>Updated: April 2026</span>
+      </div>
+    </div>
+    <div class="hdr-stats">
+      <div class="stat"><div class="stat-n">587K+</div><div class="stat-l" data-uk>Підписників разом</div><div class="stat-l" data-en>Total subscribers</div></div>
+      <div class="stat"><div class="stat-n">13</div><div class="stat-l" data-uk>Каналів</div><div class="stat-l" data-en>Channels</div></div>
+      <div class="stat"><div class="stat-n">4</div><div class="stat-l" data-uk>Формати реклами</div><div class="stat-l" data-en>Ad formats</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <span class="fl" data-uk>Фільтр:</span><span class="fl" data-en>Filter:</span>
+    <button class="fb on" onclick="fc('all',this)"><span data-uk>Усі</span><span data-en>All</span></button>
+    <button class="fb" onclick="fc('ling',this)">🗣 <span data-uk>Мови</span><span data-en>Language</span></button>
+    <button class="fb" onclick="fc('travel',this)">🗺 <span data-uk>Афіша</span><span data-en>Events</span></button>
+    <button class="fb" onclick="fc('edu',this)">📚 <span data-uk>Освіта</span><span data-en>Education</span></button>
+    <button class="fb" onclick="fc('facts',this)">💡 <span data-uk>Факти</span><span data-en>Facts</span></button>
+    <button class="fb" onclick="fc('dias',this)">🌍 <span data-uk>Діаспора</span><span data-en>Diaspora</span></button>
+    <div class="sep"></div>
+    <div class="ls">
+      <button class="lb on" onclick="sl('uk',this)">УКР</button>
+      <button class="lb" onclick="sl('en',this)">ENG</button>
+    </div>
+  </div>
+</div>
+
+<main class="main-ct">
+  <div class="sum">
+    <div class="sc"><div class="sc-n">587K</div><div class="sc-l" data-uk>Підписників разом</div><div class="sc-l" data-en>Total subscribers</div></div>
+    <div class="sc"><div class="sc-n">~68K</div><div class="sc-l" data-uk>Середнє охоплення</div><div class="sc-l" data-en>Avg post reach</div></div>
+    <div class="sc"><div class="sc-n">13.6%</div><div class="sc-l" data-uk>Середній ER</div><div class="sc-l" data-en>Average ER</div></div>
+    <div class="sc"><div class="sc-n">4</div><div class="sc-l" data-uk>Формати реклами</div><div class="sc-l" data-en>Ad formats</div></div>
+  </div>
+
+  <div class="fmt">
+    <div class="fmt-t" data-uk>Формати реклами</div>
+    <div class="fmt-t" data-en>Ad formats</div>
+    <div class="fmt-g">
+      <div class="fi">
+        <div class="fi-n">1/24</div>
+        <div class="fi-d" data-uk><span class="hl">1 год</span> у топі каналу<br><span class="hl">24 год</span> у стрічці каналу</div>
+        <div class="fi-d" data-en><span class="hl">1 hr</span> pinned at top<br><span class="hl">24 hrs</span> in channel feed</div>
+      </div>
+      <div class="fi">
+        <div class="fi-n">2/48</div>
+        <div class="fi-d" data-uk><span class="hl">2 год</span> у топі каналу<br><span class="hl">48 год</span> у стрічці каналу</div>
+        <div class="fi-d" data-en><span class="hl">2 hrs</span> pinned at top<br><span class="hl">48 hrs</span> in channel feed</div>
+      </div>
+      <div class="fi">
+        <div class="fi-n">2/без видалення</div>
+        <div class="fi-d" data-uk><span class="hl">2 год</span> у топі каналу<br><span class="hl">Назавжди</span> у стрічці — не видаляється</div>
+        <div class="fi-d" data-en><span class="hl">2 hrs</span> pinned at top<br><span class="hl">Forever</span> in feed — never deleted</div>
+      </div>
+      <div class="fi nat">
+        <div class="fi-n" data-uk>Нативна реклама</div>
+        <div class="fi-n" data-en>Native ad</div>
+        <div class="fi-d" data-uk>Органічна інтеграція в контент. Ціна узгоджується індивідуально з менеджером.</div>
+        <div class="fi-d" data-en>Organic integration into channel content. Price agreed individually with manager.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sh">
+    <h2 data-uk>Канали</h2><h2 data-en>Channels</h2>
+    <span class="sh-c" id="cnt-uk" data-uk>Показано 13 з 13</span>
+    <span class="sh-c" id="cnt-en" data-en>Showing 13 of 13</span>
+  </div>
+
+  <div class="grid" id="grid">
+
+<!-- AVATARS from Apify/Telegram CDN:
+  anty_surzhyk      → telesco.pe ZmkfsM...
+  diaspora_ukraine  → telesco.pe flweYf...
+  polish_diaspora   → telesco.pe C9gs-9...
+  a_ty_znav_ua      → t.me/i/userpic/320/...
+  Private channels  → initials fallback
+-->
+
+<!-- 1. Доступна англійська -->
+<div class="card" data-cat="ling" style="animation-delay:.03s">
+  <div class="ca"></div>
+  <div class="ct-top">
+    <div class="av" id="av-1878649336" style="padding:0"><img src="data:image/jpeg;base64,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" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:11px"></div>
+    <div class="ta">
+      <div class="cn-row"><div class="cn">Доступна англійська</div><span class="badge badge-top" data-uk>Топ-канал</span><span class="badge badge-top" data-en>Top Channel</span></div>
+      <a class="cl" href="https://t.me/+7bg9oCFsbeJmOWEy" target="_blank">↗ t.me/dostupna_en</a>
+      <div class="tags"><span class="tag" data-uk>Лінгвістика</span><span class="tag" data-en>Linguistics</span><span class="tag geo">🇺🇦 UA</span></div>
+    </div>
+  </div>
+  <div class="cs">
+    <div class="cs-s"><div class="cs-v">134 874</div><div class="cs-l" data-uk>Підписники</div><div class="cs-l" data-en>Subscribers</div></div>
+    <div class="cs-s"><div class="cs-v">15 143</div><div class="cs-l" data-uk>Перегляди</div><div class="cs-l" data-en>Views</div></div>
+    <div class="cs-s"><div class="cs-v er">11.2%</div><div class="cs-l">ER</div></div>
+  </div>
+  <div class="cp">
+    <div class="pr"><span class="pf">1/24</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf">2/48</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf" data-uk>2/без вид.</span><span class="pf" data-en>2/permanent</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr nat"><span class="nl" data-uk>Нативна</span><span class="nl" data-en>Native</span><a class="nc" href="#contact" data-uk>За запитом</a><a class="nc" href="#contact" data-en>On request</a></div>
+  </div>
+</div>
+
+<!-- 2. Головна афіша Києва -->
+<div class="card" data-cat="travel" style="animation-delay:.06s">
+  <div class="ca"></div>
+  <div class="ct-top">
+    <div class="av" id="av-1848635432" style="padding:0"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCABkAGQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDtZGz0NQuzDpTnU54NQtu9a8FSPFRG5brmq8rMAOT94fzqZg57jFc3d30reIYtNkkH/HwGXYCBtCFgCe5zjOKfMkaQg5bGxK8mM1WlY+tWXVscYP41XlU55A/OtotE2KsrMB1qrKzc81e3BST5YP1qCQhicqo+grWLQGbKW74qu/uK0ZUj7gVWkRP4ea2TRLKDEegqNlzVt4wD04qPyx2xWsZITKTK2aKt7B6UVXMjOx6MZ8fxVG84NcpfeJIjHttVdZMgneowB3HWqkniWZr4yRxO1tg4jwM9Oua+eVz0vq7OxedSMCuD12R08bWbq3W4HQdiBV2TxTZiaNfLl2lSZPl5U9gPWsDUryKbXLe/DsYhOG6c7c+nrgdK0imzSnT5GehmUYqGSVc8Vz83iKy8xQgnKHO5tnT8O9Vj4l0pi4W6bcnLKUIYfhW0Yy7GfszonkWq8kgrDi8Q6bOSIbpXI6gDn8qV9Wte7yD6oa2UJC5UjUkkFV2fnis59Z04dbpfyNRtrWm44uQfoprVRl2E4o0WYH3qJtvpWc2t6bj/AF5/75NRNrenY/15/wC+TWijIzcUafy0VkHXNOB5n/Siq5ZC5UVTfJOhEYhB4GNuHJ7n6URTCWKQKHEoPysnUnnI/wD1VmXjSxEby6u5ISKJTnH+fxqK5guZGEh3wIW5LScKMeg6D3rwozjzK57TiraDpUQQGa5a4WQkjbnvU+rI2lAadM6ySqMyHB+UnsOe2RVeytYI53vrgvPFbr5xX5wDgjAOfc9Kj8R3i32rz3DAh5CJMDpgjNd1GPNqZTetimDc277IrvYirvDM+ARiup+HngTx/wCN3e48PaNDNApIa/nxHCW7jfn5j64BIq58EfDrePPGun+HAMae++S/lx8wt48EqPQsWCg/7We1fS37S+/wl8EC/hvxJd+C4tLuIPJl0y0MpKAlRDtBGFJIJP8As85zXbRot3vsT8W6Pnc/BnxRrf8AaVv4e1Lwhrup6XL5V9bafqeZoHxwpDqAD264yCM5BrynxDFq/h7VptK1uwvNNv7dgJLedWVwPX3B7EcGu08FXfjLS/G8jyXGoeAf+Ep1yBrjUrHTHdppCqyCELkeTGfP80o3OHXgha+vf2h/h1p3jjwZPeLZRPrmlRPcafNj5m2jc0JPdWxjB4Bwa6JU9NBcqsfBcOvy5iT7NKzRKTICm4t3H/66fJry7naWxnCjAyFYfXOOPwqm7XE7yyJoVwQ+NxJxuGeAAMVWjvJS7hNOS2XBXG0nI5B61m04mTUZGzHrOgv/AK4ajA+AWBRWA/TNaNlbWOp2xl0+7UkfwmRQ34r1FcbZXG+6DvE/2JFKuYwxznoCc0upz26xmS2uf3vVAsWCP+BZzR7T3+WxDpaaM7FNJmcFgyAZ4DS4NFcXD4l1yKJU/tG6AA4yM8fU0Vryoz9nPyPVEsb+4sfP1PUmt1fJEaccepPp+Fe7/CL4F/bdOg1rXbqe0jnUPFEFDTSIeQWLghAeuME+pHSvDPh3Ppmq/EHwxo08U62l7q1uriaTdvQyDjkdDjFfoOOleTgMHe8qnR6W0PSqdjwnxx4R+EWk3kui+JLzXP3Vql3Ptikkihid2VGd0jIXc6FQOpIAA5Fc3qfgr4B2tjJqF7L4mhaOWSGe3MFyLiBoofObzIfL3IBEQ+SMbTnNe8a/4L8O67c6jcapZNcPqNjFY3H751zFFI8ke3BG1ldywYYIOOeBXDeIvDfw78P+JNH0TWU1q+1PxYL2wjnmu5Z2mZ7dVleRy3DeSqorfwrkDGSa9dU4roZKKRgeDbT4PfD7WNR1HQtc1mylFvNFPdvC8kEnlJ50sSSNEUaVVTcUUlvlIxkEDsIviR4JnspbiTxrfRRxw3Msq3FssZC26xtKCGiGSFmjO0ZJDcZwccPdXfwavI2m+y+ILrR9S15vD9qY5JTYS39zG8Us0C78dDIrTKMBmYrySadbwfAX/hK/Eng6Zmu7vRtJu7jWLm5kaSC3ikWGKb5ycLIqxxD5QCuDzuzVpWGekaBe+GLjxVf6PpGv3A1iaCLU7tEt41aQOiosjMYsFtnlgjO4KUyACMtufGHhiGbWrafxneB9Gmit75PJQlZJeERAIv3jE5XCbjuBXqCK4TwDqfw2u/F1hrukeDfG1ldzme6s9cvNNuUhvFMOGBkJI8sxom0OFB2JjoKwvCmr/BTV7vRLmLwv4r06LxHcNbWGrXkM8Ud9cvN5wPnK5Pm+ahZX4IO7BAJoAjtPD3wCutKi1SLXtZEEsLzbWMiyIqrG5LIYwV+WVCOOQcjOKm1b4W/AW9jvo72/1UGyhvJrh1ldGVLabyZ+QnzESYXAyWzxmtbV9J+Cfh/xZpPwtvU1JdUvrX7MkxupnwJUCRxyzlsq7LbgRr22/KBnntYfg14LBm+1Lq1+k7M0sd3qc0iuWuFuXyCejTKrsO5HpUuMXuiVCK6Hnml/sy/CXXPC8N54f1HxBHZX0QngmS+3AhhwSjp17EEAjkHFfOPx1+DmpfCnU1eW6N1pt8StnfxpsUsOfLZf4Hxz1IIBI6ED7/8ACfhzSvC2kf2TosD29iJpJo4TIzrGZGLsFyThdxJx0GTXC/tV6XBqvwK8RJLDDJNbxx3FsZAMLKsi7Tz0zkj6E1E4RtfYGlbY+B7BLZoTvkglYNgyOGcvwOeOg9vailW30W3URTrAsw/1gV2Az7c0V5ri29LlJSsaWp3SWeo2V/bu1jNZtG9sInBaPY+5SfcGvuL4LfG3wn8QNHgjl1G103X1ULc2E8oQs3dosn51PXjkdDX573dtcJK6MUJXPIcYHIwffrVKbAxnnDAjuD+ddOGXs42TuaSaZ+svnw/89Y/++hXnHxg+GunfEbxD4RutUubOTS9Eup5ruzmDH7UskYUKGVhtwQDX5xo93JlUMu0/xbj/AJ60+NL8KVWSTjPzNIQOuOMn1rp9qjO59x618Dddu/AOmeB7Hx5DaabofiCLU9Eu/IJu7S3USfuSQwDOpfKv7cjpjRl+AXhsazfxWl/HaeHrzwi3h57ePm5MrXHnNdNIThnLYJyOT7cV+fwkuRdeU8snB5PmHH86mN9dq4lWeQY4wXJJ6VakK59/fCr4W+JvBMr2EXiDwmmkvb+RdPaaZKl3qIWNkjMrPOyIQW3HYvPSuU8Dfs66loMvhZZNe8MWraBfJd/2np1jMmoXIUsTEzvMUCsG2nCdAK+Jby7mmk3yO4PfaxB+tMR5cFlncKBk5kai4uY+9tU+AEmu6d4ivdb+IeqJ4i1y9+3ySWRjS0jmjJ+y4RlMm2IbQMODjPSvbfD7XsGh2MOtX9pdalHAi3U8A2RyyAYZlUnIBPOO2a/K221J1VR9pkYn7xYk447c+5p9tqjxQ7goaXbtdmySfrS5n2DmP1XvNRsLK3e5vL22t4UGXkllVFUe5JwK+Qf2tfjlpXii0HgPwRdC/tFmEupX8J/dyFOVijP8ShsFm6cADPNfLEhjnEiSeZISfkUEkA/Q9antTdabuR7GZJGByXhO4D2yKUpaWBSK95Nmcm4GJO+9eaKuG5E37xk356HIopJtCsV7y7E24Z6NnioWdxCGIYr2PbNP02KG4ukEinyydpCnBY02+fZIVWERAcAH0PepVk7IpyJ4SY9MkmaQDe2wDPPFQQQTXEqrG5O84BPQmruowWkGnRwRwuZcA72OMt6Ad/wqlHJJBtBV0CjaexFKGqbJ3IbhfKl6nGe5zSRudrZG7dwPrinSCckxmEh1+8cdPrUaISRll64PPQ1qhCTMZDjPPSmyEDAycVJJGgdZATsY9M/Nirk1n9nCvvgTzOApOWQe/uaTdhXsVIJVEHQbmByTyTTPMJU8nnrz1NaEFgr35ia4/d+WX3qoJbHQAe+ajkiSCCVFTHH3nGdwHXB7UuZC5kWvDV3b2Cm7Zd9yciMkAhB6/wC9Vt9fvWvgvnyOOhBJ5HXoK56xuZIZSI9h9NwyDVwvcRsbmSVVkLEkA8jPFZSopttq5pd7GpLqpWQpJbxb1ODmAE/jRWWkokzIXxuOcHk0VHso9iS3EsdlLBJFGrcLkPyDkZ5rWi0uznsby8uEaaUGMKWPC5UE4x9aKKiTe/8AW4pF3xXItvDHZRQwrEjB+VyWYY5JPWuYstRuBK8aiNVZtxCrjOBx/IH60UUYbWnqKRXm1C5kXcWAznIHAP19aog5k6DB5x260UV2JDRdjt45bdnOQUKYwfXOat3OCrBlVvM2kkj1zn+QooqZbhEh1KRoXuDD+73MrEJxzVO3HnXIWUlgBnBP1oopx+ElbFeIlNrqcEmpg7MpZjuIbPPTNFFUaIsXKhyjY2koM7eKKKKhAz//2Q==" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:11px"></div>
+    <div class="ta">
+      <div class="cn">Головна афіша Києва</div>
+      <a class="cl" href="https://t.me/+G-XMfXddtmc1NjYy" target="_blank">↗ t.me/afisha_kyiv</a>
+      <div class="tags"><span class="tag" data-uk>Афіша</span><span class="tag" data-en>Events</span><span class="tag geo">🇺🇦 UA</span></div>
+    </div>
+  </div>
+  <div class="cs">
+    <div class="cs-s"><div class="cs-v">66 765</div><div class="cs-l" data-uk>Підписники</div><div class="cs-l" data-en>Subscribers</div></div>
+    <div class="cs-s"><div class="cs-v">8 167</div><div class="cs-l" data-uk>Перегляди</div><div class="cs-l" data-en>Views</div></div>
+    <div class="cs-s"><div class="cs-v er">12.2%</div><div class="cs-l">ER</div></div>
+  </div>
+  <div class="cp">
+    <div class="pr"><span class="pf">1/24</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf">2/48</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf" data-uk>2/без вид.</span><span class="pf" data-en>2/permanent</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr nat"><span class="nl" data-uk>Нативна</span><span class="nl" data-en>Native</span><a class="nc" href="#contact" data-uk>За запитом</a><a class="nc" href="#contact" data-en>On request</a></div>
+  </div>
+</div>
+
+<!-- 3. 5 слів англійською -->
+<div class="card" data-cat="ling" style="animation-delay:.09s">
+  <div class="ca"></div>
+  <div class="ct-top">
+    <div class="av" id="av-1867061350" style="padding:0"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCABkAGQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDBooor92PggooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiur8A+Adc8aR3culPZxxWrKjvcSFQWIzgYBzxWVfEUsPB1KsrJdS6dOVSXLFXZylFeqf8KJ8Y/8/mj/APf6T/4ivNNWsn07VLrT5JYpXtpmhZ4m3IxU4JU9xxWGFzDDYttUZqTXYurh6tJXnGxWooorsMQooooAKKKKACiiigAooooAK9u+EdxoUHwh1W31DxHBpBuruQXMqyhZ402qo2DruIHBAPU14jXsXgDwZ4d8YfCme20tbJPFCSEyzzZLoQ+VHqqMmBkD1rw+IPZ/Vo+1bUeaOqV7eb8vv1tod2X83tHypN2e5t6RoXw+8WpNpnhzxp4hGoLGWBkvptxHc7HwGHqBj8K8R8R6Td6Drt5o98F+0Wkpjcr0buGHsQQfxr2f4T/C/XfDPitPEOv3FjbW9lHIVWOfduLKVyTgBVAJPNcf44tbLxh4k1bxNaagUtp9Uj0+1VYg3mkJGoflgcHOeATjk152W4yFDFzpwqudKy1etpN7XS7HTiaMp0YylDllfby7nnNFd23w5mjaIPqqyC4laG2aC3Mgc7pdrH5hhSIie5BOMEg1wY5ANfS4fF0cTf2Ur2/r9DzKlKdO3MhaKKK6DMKKKKACiiigAroLfwZ4juLrR7aDTxJJrMJmsdsqlZEAySTnC4HUGufr2Dwh4nsrP4QPqJuYf7a0BLi1soyw34nZNrAdwMkf8BNebmeJr4eEZUY3bdvvTs/TmtfyOnDU6dSTU3ayv92/4HnKeFPED6fNfLpshihvhp7AMN5uM48tV6sc+laup+BvHXhWxGuz6fdWMUQy09vcqXhB/vbGyo/SvUPEfinw5pfifwkLe9hWyudQl1i+KuGETSxlVLY6cuT7AZrPkt4/C9t481jV/EWmXVprVtNHYRQXnnPMzlyvy+wYDvj6V4yznFTUXKCSlsmneXvcrS13W/XS2h2/U6Ub2e3W600vf9Dj7rw38Utc0UXN62q3lgbYXQFxf5Ux4JHyluTgZ29cY9avfDbwD4wurvS7i7ttRtfD17Kr3AivPKZ49uQxQMGwfl5xnBqD41ais9n4StLW/EqwaHF5kUU2QkhAHIB4bA78130kUGr/ABB8L+NLLxJpUejw2sUTo95sk34YFNnqSwyO2DnpWdfGYiOETtGKmpWtF6W2W+76PpbZlU6NN1erat1XXfpsjzdvCviq/wDEXiC38MJdpp1nezWjM195UYXzCfLLMw3dckc9cnrXJa/ouqaBqT6bq9m9pdIAxRsHKnoQRwR7ivWdDuZdSXxRa2c/hnXLKfXZpTpOpSCLcpPE8cme+B2PTOex4z4yQ6RB4qhj0e+Nyi2cYmiF0bhLVxkeUjnqoGOO2fwruy/HVZYn2E0rW7O+iW7v59rdmznxFCCpc67/AOe3/D/I4qiiivoTzwooooAKKKKACkwM5wM0tFACAAdABQAoOQoH0FLRTAQADoAKCqk5Kgn6UtFACEA9QD9RQOBgDApaKACiiikAUUUUAFFFFABRRRQBdsb6C3hCS6XZ3TAt88u7ODj0I6Y4PbJq42uWzKqHw9pXloSVTa/GfcHJ9s5xWNRWEsNTm7u/3v8AzNFVklZGpDqdnHEkf9g6fIVAG+QuWb3PIGfoBTm1WyM0sv8AYGnZkI+Ul9q4znaM8Zzz9BjFZNFH1anvr97/AMw9rL+kia/lhnvJpoLZbaJ2JSFTkIPQGoaKK2ilFJIhu7uFFFFMQUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAH/9k=" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:11px"></div>
+    <div class="ta">
+      <div class="cn">5 слів англійською</div>
+      <a class="cl" href="https://t.me/+zQ15HQ2WTLplMGUy" target="_blank">↗ t.me/5words_en</a>
+      <div class="tags"><span class="tag" data-uk>Лінгвістика</span><span class="tag" data-en>Linguistics</span><span class="tag geo">🇺🇦 UA</span></div>
+    </div>
+  </div>
+  <div class="cs">
+    <div class="cs-s"><div class="cs-v">63 288</div><div class="cs-l" data-uk>Підписники</div><div class="cs-l" data-en>Subscribers</div></div>
+    <div class="cs-s"><div class="cs-v">4 309</div><div class="cs-l" data-uk>Перегляди</div><div class="cs-l" data-en>Views</div></div>
+    <div class="cs-s"><div class="cs-v er">6.8%</div><div class="cs-l">ER</div></div>
+  </div>
+  <div class="cp">
+    <div class="pr"><span class="pf">1/24</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf">2/48</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf" data-uk>2/без вид.</span><span class="pf" data-en>2/permanent</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr nat"><span class="nl" data-uk>Нативна</span><span class="nl" data-en>Native</span><a class="nc" href="#contact" data-uk>За запитом</a><a class="nc" href="#contact" data-en>On request</a></div>
+  </div>
+</div>
+
+<!-- 4. Доступна німецька -->
+<div class="card" data-cat="ling" style="animation-delay:.12s">
+  <div class="ca"></div>
+  <div class="ct-top">
+    <div class="av" id="av-2068594702" style="padding:0"><img src="data:image/jpeg;base64,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" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:11px"></div>
+    <div class="ta">
+      <div class="cn">Доступна німецька</div>
+      <a class="cl" href="https://t.me/+7Y_gWhgBtLcwODJi" target="_blank">↗ t.me/dostupna_de</a>
+      <div class="tags"><span class="tag" data-uk>Лінгвістика</span><span class="tag" data-en>Linguistics</span><span class="tag geo">🇺🇦 UA</span></div>
+    </div>
+  </div>
+  <div class="cs">
+    <div class="cs-s"><div class="cs-v">62 212</div><div class="cs-l" data-uk>Підписники</div><div class="cs-l" data-en>Subscribers</div></div>
+    <div class="cs-s"><div class="cs-v">9 287</div><div class="cs-l" data-uk>Перегляди</div><div class="cs-l" data-en>Views</div></div>
+    <div class="cs-s"><div class="cs-v er">14.9%</div><div class="cs-l">ER</div></div>
+  </div>
+  <div class="cp">
+    <div class="pr"><span class="pf">1/24</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf">2/48</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf" data-uk>2/без вид.</span><span class="pf" data-en>2/permanent</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr nat"><span class="nl" data-uk>Нативна</span><span class="nl" data-en>Native</span><a class="nc" href="#contact" data-uk>За запитом</a><a class="nc" href="#contact" data-en>On request</a></div>
+  </div>
+</div>
+
+<!-- 5. Англійська у смартфоні -->
+<div class="card" data-cat="ling" style="animation-delay:.15s">
+  <div class="ca"></div>
+  <div class="ct-top">
+    <div class="av" id="av-1887757000" style="padding:0"><img src="data:image/jpeg;base64,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" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:11px"></div>
+    <div class="ta">
+      <div class="cn">Англійська у смартфоні</div>
+      <a class="cl" href="https://t.me/+0YTwFyvS2Mg4Yjdi" target="_blank">↗ t.me/english_phone</a>
+      <div class="tags"><span class="tag" data-uk>Лінгвістика</span><span class="tag" data-en>Linguistics</span><span class="tag geo">🇺🇦 UA</span></div>
+    </div>
+  </div>
+  <div class="cs">
+    <div class="cs-s"><div class="cs-v">55 714</div><div class="cs-l" data-uk>Підписники</div><div class="cs-l" data-en>Subscribers</div></div>
+    <div class="cs-s"><div class="cs-v">3 443</div><div class="cs-l" data-uk>Перегляди</div><div class="cs-l" data-en>Views</div></div>
+    <div class="cs-s"><div class="cs-v er">6.2%</div><div class="cs-l">ER</div></div>
+  </div>
+  <div class="cp">
+    <div class="pr"><span class="pf">1/24</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf">2/48</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf" data-uk>2/без вид.</span><span class="pf" data-en>2/permanent</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr nat"><span class="nl" data-uk>Нативна</span><span class="nl" data-en>Native</span><a class="nc" href="#contact" data-uk>За запитом</a><a class="nc" href="#contact" data-en>On request</a></div>
+  </div>
+</div>
+
+<!-- 6. Антисуржик — avatar from Apify -->
+<div class="card" data-cat="ling" style="animation-delay:.18s">
+  <div class="ca"></div>
+  <div class="ct-top">
+    <div class="av" style="padding:0">
+      <img src="https://cdn4.telesco.pe/file/ZmkfsMPrnwYVLVw9Z5YXG8W1hYtfWPwXBg4lmhMrdhn7_bf6smKzf2b8OhE7wKfHhWn5CDuYc3wNVeAB1lCI7QVplhQuLqy8uwkxbee_mpKAVoGa9Aqz38_a4eU6NdruLNE2aFhr-TffG_Rrxthoi8mprxfQ--PdDEiLImT69YkkLBRrBP9ms7ovrBIqHmHJClZ0YreUCTAx3W2F0vDeQgZFuH02wxGIa4LbIyKY6G9POXWfM68BmPRDE1Ki9vpVwh9_x-rsbCz5CkLZknWSDy5Bu8YTUReadwdpYnVOc87pQlDMvOGOSpIccvRsX2uxS21B0kyzXrd5KH9oMCbsWQ.jpg" alt="Антисуржик" onerror="this.parentNode.innerHTML='<span>АН</span>'">
+    </div>
+    <div class="ta">
+      <div class="cn-row"><div class="cn">Антисуржик</div><span class="badge badge-er">ER 21.5%</span></div>
+      <a class="cl" href="https://t.me/anty_surzhyk" target="_blank">↗ t.me/anty_surzhyk</a>
+      <div class="tags"><span class="tag" data-uk>Лінгвістика</span><span class="tag" data-en>Linguistics</span><span class="tag geo">🇺🇦 UA</span></div>
+    </div>
+  </div>
+  <div class="cs">
+    <div class="cs-s"><div class="cs-v">51 598</div><div class="cs-l" data-uk>Підписники</div><div class="cs-l" data-en>Subscribers</div></div>
+    <div class="cs-s"><div class="cs-v">11 083</div><div class="cs-l" data-uk>Перегляди</div><div class="cs-l" data-en>Views</div></div>
+    <div class="cs-s"><div class="cs-v er">21.5%</div><div class="cs-l">ER</div></div>
+  </div>
+  <div class="cp">
+    <div class="pr"><span class="pf">1/24</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf">2/48</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf" data-uk>2/без вид.</span><span class="pf" data-en>2/permanent</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr nat"><span class="nl" data-uk>Нативна</span><span class="nl" data-en>Native</span><a class="nc" href="#contact" data-uk>За запитом</a><a class="nc" href="#contact" data-en>On request</a></div>
+  </div>
+</div>
+
+<!-- 7. Німеччина | Діаспора -->
+<div class="card" data-cat="travel dias" style="animation-delay:.21s">
+  <div class="ca"></div>
+  <div class="ct-top">
+    <div class="av" id="av-2130166752" style="padding:0"><img src="data:image/jpeg;base64,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" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:11px"></div>
+    <div class="ta">
+      <div class="cn">Німеччина | Діаспора</div>
+      <a class="cl" href="https://t.me/+45m7tw4Ng5c1YTEy" target="_blank">↗ t.me/germany_dias</a>
+      <div class="tags"><span class="tag" data-uk>Діаспора</span><span class="tag" data-en>Diaspora</span><span class="tag geo">🇩🇪 DE</span></div>
+    </div>
+  </div>
+  <div class="cs">
+    <div class="cs-s"><div class="cs-v">44 277</div><div class="cs-l" data-uk>Підписники</div><div class="cs-l" data-en>Subscribers</div></div>
+    <div class="cs-s"><div class="cs-v">7 746</div><div class="cs-l" data-uk>Перегляди</div><div class="cs-l" data-en>Views</div></div>
+    <div class="cs-s"><div class="cs-v er">17.5%</div><div class="cs-l">ER</div></div>
+  </div>
+  <div class="cp">
+    <div class="pr"><span class="pf">1/24</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf">2/48</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf" data-uk>2/без вид.</span><span class="pf" data-en>2/permanent</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr nat"><span class="nl" data-uk>Нативна</span><span class="nl" data-en>Native</span><a class="nc" href="#contact" data-uk>За запитом</a><a class="nc" href="#contact" data-en>On request</a></div>
+  </div>
+</div>
+
+<!-- 8. Доступна освіта -->
+<div class="card" data-cat="edu" style="animation-delay:.24s">
+  <div class="ca"></div>
+  <div class="ct-top">
+    <div class="av" id="av-1992501749" style="padding:0"><img src="data:image/jpeg;base64,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" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:11px"></div>
+    <div class="ta">
+      <div class="cn">Доступна освіта</div>
+      <a class="cl" href="https://t.me/+4XviiWWCstMzYWI6" target="_blank">↗ t.me/dostupna_edu</a>
+      <div class="tags"><span class="tag" data-uk>Освіта</span><span class="tag" data-en>Education</span><span class="tag geo">🇺🇦 UA</span></div>
+    </div>
+  </div>
+  <div class="cs">
+    <div class="cs-s"><div class="cs-v">34 844</div><div class="cs-l" data-uk>Підписники</div><div class="cs-l" data-en>Subscribers</div></div>
+    <div class="cs-s"><div class="cs-v">1 616</div><div class="cs-l" data-uk>Перегляди</div><div class="cs-l" data-en>Views</div></div>
+    <div class="cs-s"><div class="cs-v er">4.6%</div><div class="cs-l">ER</div></div>
+  </div>
+  <div class="cp">
+    <div class="pr"><span class="pf">1/24</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf">2/48</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf" data-uk>2/без вид.</span><span class="pf" data-en>2/permanent</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr nat"><span class="nl" data-uk>Нативна</span><span class="nl" data-en>Native</span><a class="nc" href="#contact" data-uk>За запитом</a><a class="nc" href="#contact" data-en>On request</a></div>
+  </div>
+</div>
+
+<!-- 9. Цікавий Київ -->
+<div class="card" data-cat="travel" style="animation-delay:.27s">
+  <div class="ca"></div>
+  <div class="ct-top">
+    <div class="av" id="av-1132776990" style="padding:0"><img src="data:image/jpeg;base64,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" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:11px"></div>
+    <div class="ta">
+      <div class="cn">Цікавий Київ ⚡️ Афіша</div>
+      <a class="cl" href="https://t.me/+AAAAAEOEzh7xVfgnL-88TA" target="_blank">↗ t.me/kyiv_afisha</a>
+      <div class="tags"><span class="tag" data-uk>Афіша</span><span class="tag" data-en>Events</span><span class="tag geo">🇺🇦 UA</span></div>
+    </div>
+  </div>
+  <div class="cs">
+    <div class="cs-s"><div class="cs-v">23 607</div><div class="cs-l" data-uk>Підписники</div><div class="cs-l" data-en>Subscribers</div></div>
+    <div class="cs-s"><div class="cs-v">1 393</div><div class="cs-l" data-uk>Перегляди</div><div class="cs-l" data-en>Views</div></div>
+    <div class="cs-s"><div class="cs-v er">5.9%</div><div class="cs-l">ER</div></div>
+  </div>
+  <div class="cp">
+    <div class="pr"><span class="pf">1/24</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf">2/48</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf" data-uk>2/без вид.</span><span class="pf" data-en>2/permanent</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr nat"><span class="nl" data-uk>Нативна</span><span class="nl" data-en>Native</span><a class="nc" href="#contact" data-uk>За запитом</a><a class="nc" href="#contact" data-en>On request</a></div>
+  </div>
+</div>
+
+<!-- 10. Українська діаспора — avatar from Apify -->
+<div class="card" data-cat="travel dias" style="animation-delay:.30s">
+  <div class="ca"></div>
+  <div class="ct-top">
+    <div class="av" style="padding:0">
+      <img src="https://cdn4.telesco.pe/file/flweYfNnhwYKNUm9zpzGuiE2C_uKac-Js1y1AGsVVHyQ95Jt9LHJRppJEQnEaSx6_vhy5vTG6NvCcdFtQKK5wmrC99K8yphacNW70pwyWwdZKYq10FOmhBwnXAW_c3YFNoTwmB28nK-UM-UXgSeYoOa2ePwF4G9oIqpjdHQh_lUM35RlQHPkDwKaGfy2j160hMCWqiVTe2Ogin1mLRp7xxrt6K5KoO7oN7V-9zEfqf-pGJp0SVO6BqPzwkfBLQzIHelJpzhqVGho6uqbBHD0weKO_H6sJ2kQatihVBfDVBVNBhKXP5b4Fd9GtBdtuSgnSNJ2bmfJkLzLIysN5CPwyQ.jpg" alt="Українська діаспора" onerror="this.parentNode.innerHTML='<span>УД</span>'">
+    </div>
+    <div class="ta">
+      <div class="cn">Українська діаспора | Українці в Європі</div>
+      <a class="cl" href="https://t.me/diaspora_ukraine" target="_blank">↗ t.me/diaspora_ukraine</a>
+      <div class="tags"><span class="tag" data-uk>Діаспора</span><span class="tag" data-en>Diaspora</span><span class="tag geo">🇪🇺 EU</span></div>
+    </div>
+  </div>
+  <div class="cs">
+    <div class="cs-s"><div class="cs-v">21 717</div><div class="cs-l" data-uk>Підписники</div><div class="cs-l" data-en>Subscribers</div></div>
+    <div class="cs-s"><div class="cs-v">2 412</div><div class="cs-l" data-uk>Перегляди</div><div class="cs-l" data-en>Views</div></div>
+    <div class="cs-s"><div class="cs-v er">11.1%</div><div class="cs-l">ER</div></div>
+  </div>
+  <div class="cp">
+    <div class="pr"><span class="pf">1/24</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf">2/48</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf" data-uk>2/без вид.</span><span class="pf" data-en>2/permanent</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr nat"><span class="nl" data-uk>Нативна</span><span class="nl" data-en>Native</span><a class="nc" href="#contact" data-uk>За запитом</a><a class="nc" href="#contact" data-en>On request</a></div>
+  </div>
+</div>
+
+<!-- 11. Головна афіша Львова -->
+<div class="card" data-cat="travel" style="animation-delay:.33s">
+  <div class="ca"></div>
+  <div class="ct-top">
+    <div class="av" id="av-1904852390" style="padding:0"><img src="data:image/jpeg;base64,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" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:11px"></div>
+    <div class="ta">
+      <div class="cn">Головна афіша Львова</div>
+      <a class="cl" href="https://t.me/+l8gAC1q6ihA4NTIy" target="_blank">↗ t.me/afisha_lviv</a>
+      <div class="tags"><span class="tag" data-uk>Афіша</span><span class="tag" data-en>Events</span><span class="tag geo">🇺🇦 UA</span></div>
+    </div>
+  </div>
+  <div class="cs">
+    <div class="cs-s"><div class="cs-v">12 188</div><div class="cs-l" data-uk>Підписники</div><div class="cs-l" data-en>Subscribers</div></div>
+    <div class="cs-s"><div class="cs-v">2 316</div><div class="cs-l" data-uk>Перегляди</div><div class="cs-l" data-en>Views</div></div>
+    <div class="cs-s"><div class="cs-v er">19.0%</div><div class="cs-l">ER</div></div>
+  </div>
+  <div class="cp">
+    <div class="pr"><span class="pf">1/24</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf">2/48</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf" data-uk>2/без вид.</span><span class="pf" data-en>2/permanent</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr nat"><span class="nl" data-uk>Нативна</span><span class="nl" data-en>Native</span><a class="nc" href="#contact" data-uk>За запитом</a><a class="nc" href="#contact" data-en>On request</a></div>
+  </div>
+</div>
+
+<!-- 12. А ти знав? — avatar from t.me/i -->
+<div class="card" data-cat="facts" style="animation-delay:.36s">
+  <div class="ca"></div>
+  <div class="ct-top">
+    <div class="av" style="padding:0">
+      <img src="https://t.me/i/userpic/320/a_ty_znav_ua.jpg" alt="А ти знав?" onerror="this.parentNode.innerHTML='<span>АЗ</span>'">
+    </div>
+    <div class="ta">
+      <div class="cn-row"><div class="cn">А ти знав?</div><span class="badge badge-er" data-uk>Кращий ER</span><span class="badge badge-er" data-en>Best ER</span></div>
+      <a class="cl" href="https://t.me/a_ty_znav_ua" target="_blank">↗ t.me/a_ty_znav_ua</a>
+      <div class="tags"><span class="tag" data-uk>Факти</span><span class="tag" data-en>Facts</span><span class="tag geo">🇺🇦 UA</span></div>
+    </div>
+  </div>
+  <div class="cs">
+    <div class="cs-s"><div class="cs-v">9 582</div><div class="cs-l" data-uk>Підписники</div><div class="cs-l" data-en>Subscribers</div></div>
+    <div class="cs-s"><div class="cs-v">3 222</div><div class="cs-l" data-uk>Перегляди</div><div class="cs-l" data-en>Views</div></div>
+    <div class="cs-s"><div class="cs-v er">33.6%</div><div class="cs-l">ER</div></div>
+  </div>
+  <div class="cp">
+    <div class="pr"><span class="pf">1/24</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf">2/48</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf" data-uk>2/без вид.</span><span class="pf" data-en>2/permanent</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr nat"><span class="nl" data-uk>Нативна</span><span class="nl" data-en>Native</span><a class="nc" href="#contact" data-uk>За запитом</a><a class="nc" href="#contact" data-en>On request</a></div>
+  </div>
+</div>
+
+<!-- 13. Польща | Діаспора — avatar from Apify -->
+<div class="card" data-cat="travel dias" style="animation-delay:.39s">
+  <div class="ca"></div>
+  <div class="ct-top">
+    <div class="av" style="padding:0">
+      <img src="https://cdn4.telesco.pe/file/C9gs-9ifentRfmza-4G8gdqhO4DiuedpJZqVoHix-3hEcxn7B7Dh5FiHbSlNL_BPChg5BZc6mWMCTGRKzcI3S0NZtyXIHKADdC_LDTB7dZ2xWj_JoDBitcqEmefQ_cYJ249KGFaL-lrzYBdATKWH6TGsDdgrwSdYZlNCgd-ByD3Ma6YKG702xINbE1Zel01LAQksKzq5BA6td8xLuTUQYqjrztyhZaxNImTau_vr-8zjYvbq5JVhLgKArzTF4mrN7aWqpnPZIKE_phtvfb4GosLOTbF-KIFvPXgHGHi1wXJ4acC8zmmD3_iRztZbHZ8naUmeiwRcwjxW7-boQSZViA.jpg" alt="Польща Діаспора" onerror="this.parentNode.innerHTML='<span>ПД</span>'">
+    </div>
+    <div class="ta">
+      <div class="cn">Польща | Діаспора</div>
+      <a class="cl" href="https://t.me/polish_diaspora" target="_blank">↗ t.me/polish_diaspora</a>
+      <div class="tags"><span class="tag" data-uk>Діаспора</span><span class="tag" data-en>Diaspora</span><span class="tag geo">🇵🇱 PL</span></div>
+    </div>
+  </div>
+  <div class="cs">
+    <div class="cs-s"><div class="cs-v">6 929</div><div class="cs-l" data-uk>Підписники</div><div class="cs-l" data-en>Subscribers</div></div>
+    <div class="cs-s"><div class="cs-v">1 431</div><div class="cs-l" data-uk>Перегляди</div><div class="cs-l" data-en>Views</div></div>
+    <div class="cs-s"><div class="cs-v er">20.6%</div><div class="cs-l">ER</div></div>
+  </div>
+  <div class="cp">
+    <div class="pr"><span class="pf">1/24</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf">2/48</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr"><span class="pf" data-uk>2/без вид.</span><span class="pf" data-en>2/permanent</span><span class="pv"><span class="cur">₴</span> —</span></div>
+    <div class="pr nat"><span class="nl" data-uk>Нативна</span><span class="nl" data-en>Native</span><a class="nc" href="#contact" data-uk>За запитом</a><a class="nc" href="#contact" data-en>On request</a></div>
+  </div>
+</div>
+
+  </div><!-- /grid -->
+
+  <div class="con" id="contact">
+    <div>
+      <p class="con-ey" data-uk>Зв'язатись з нами</p><p class="con-ey" data-en>Get in touch</p>
+      <h2 class="con-t" data-uk>Готові розмістити<br>рекламу?</h2>
+      <h2 class="con-t" data-en>Ready to advertise<br>with us?</h2>
+      <p class="con-s" data-uk>Напишіть менеджеру — обговоримо формат, дати та умови. Відповідаємо швидко.</p>
+      <p class="con-s" data-en>Message our manager to discuss formats, dates and terms. We respond quickly.</p>
+    </div>
+    <div class="con-bs">
+      <a href="https://t.me/teo_ua" class="bp" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
+        <span data-uk>Написати менеджеру</span><span data-en>Contact manager</span>
+      </a>
+      <a href="mailto:tg.colab@gmail.com" class="bs">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        tg.colab@gmail.com
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p><strong>DV Media Group</strong> · © 2026 · <span data-uk>Всі права захищені</span><span data-en>All rights reserved</span></p>
+  <p style="margin-top:4px"><span data-uk>Статистика актуальна станом на квітень 2026</span><span data-en>Statistics current as of April 2026</span></p>
+</footer>
+
+<script>
+function sl(lang,btn){
+  document.body.className=lang;
+  document.querySelectorAll('.lb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.documentElement.lang=lang;
+}
+
+function fc(cat,btn){
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  let n=0,delay=0;
+  document.querySelectorAll('.card').forEach(c=>{
+    const m=cat==='all'||(c.dataset.cat||'').includes(cat);
+    if(m){
+      c.style.display='';
+      c.style.animationName='none';
+      c.style.animationDelay=(delay*0.05)+'s';
+      c.offsetHeight; // force reflow to restart animation
+      c.style.animationName='';
+      delay++;n++;
+    }else{
+      c.style.display='none';
+    }
+  });
+  document.getElementById('cnt-uk').textContent='Показано '+n+' з 13';
+  document.getElementById('cnt-en').textContent='Showing '+n+' of 13';
+}
+
+(function(){
+  function animateNum(el,final){
+    const s=final.replace(/\s/g,'');
+    const hasK=s.includes('K'),hasPct=s.includes('%'),hasPlus=s.includes('+');
+    const num=parseFloat(s.replace(/[^0-9.]/g,''));
+    if(isNaN(num))return;
+    const dur=1500;let t0=null;
+    function step(ts){
+      if(!t0)t0=ts;
+      const p=Math.min((ts-t0)/dur,1);
+      const e=1-Math.pow(1-p,3); // ease-out cubic
+      const v=e*num;
+      if(hasPct){
+        el.textContent=v.toFixed(1)+'%';
+      }else if(hasK){
+        el.textContent=Math.floor(v)+'K+';
+      }else{
+        const r=Math.floor(v);
+        el.textContent=r.toString().replace(/\B(?=(\d{3})+(?!\d))/g,'\u00a0')+(hasPlus?'+':'');
+      }
+      if(p<1)requestAnimationFrame(step);
+      else el.textContent=final;
+    }
+    requestAnimationFrame(step);
+  }
+
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting&&!e.target.dataset.cnt){
+        e.target.dataset.cnt='1';
+        animateNum(e.target,e.target.dataset.final);
+      }
+    });
+  },{threshold:0.6});
+
+  function initCounters(){
+    document.querySelectorAll('.stat-n,.sc-n').forEach(el=>{
+      el.dataset.final=el.textContent;
+      io.observe(el);
+    });
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',initCounters);
+  }else{
+    initCounters();
+  }
+})();
+</script>
+
+<div class="mobile-cta">
+  <a href="https://t.me/teo_ua" target="_blank">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
+    <span data-uk>Написати менеджеру</span><span data-en>Contact manager</span>
+  </a>
+</div>
+</body>
+</html>
